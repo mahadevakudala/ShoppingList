@@ -12,6 +12,7 @@ import (
 	//"strconv"
 
 	"shoppinglist/config"
+	"shoppinglist/model"
 
 	"github.com/gin-contrib/logger"
 	"github.com/gin-gonic/gin"
@@ -65,6 +66,20 @@ func initDB() {
 	}
 
 	fmt.Println("Database connected successfully")
+
+	//migrate the models
+	err = db.AutoMigrate(
+		&model.User{},
+		&model.ShoppingList{},
+		&model.Category{},
+		&model.Item{},
+	)
+
+	if err != nil {
+		panic("error migrating the models to the database " + err.Error())
+	}
+
+	fmt.Println("Models successfully migrated to the database")
 }
 
 func main() {
