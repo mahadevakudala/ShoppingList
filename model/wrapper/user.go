@@ -1,7 +1,6 @@
 package wrapper
 
 import (
-	"errors"
 	"shoppinglist/model"
 
 	"gorm.io/gorm"
@@ -44,25 +43,4 @@ func (u *UserWrapper) GetAllUser() []string {
 	}
 
 	return userIDs
-}
-
-func (u *UserWrapper) UserAlreadyExists(userID string) bool {
-	var user model.User
-	err := u.DB.Where(&model.User{UserID: userID}).First(&user).Error
-	return !errors.Is(err, gorm.ErrRecordNotFound)
-}
-
-func (u *UserWrapper) GetShoppingLists(userID string) []model.ShoppingList {
-	user, err := u.GetUser(userID)
-	if err != nil {
-		return nil
-	}
-
-	u.DB.Preload("ShoppingLists").Find(&user)
-	for i := 0; i < len(user.ShoppingLists); i++ {
-		u.DB.Preload("Users").Find(&user.ShoppingLists[i])
-		u.DB.Preload("Items").Find(&user.ShoppingLists[i])
-	}
-
-	return user.ShoppingLists
 }
