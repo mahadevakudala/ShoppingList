@@ -11,5 +11,5 @@ require (
 	github.com/spf13/viper v1.10.1
 	golang.org/x/crypto v0.0.0-20211215165025-cf75a172585e
 	gorm.io/driver/mysql v1.2.2
-	gorm.io/gorm  v1.22.4
-	)
+	gorm.io/gorm v1.22.4
+)
