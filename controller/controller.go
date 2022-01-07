@@ -11,6 +11,7 @@ var (
 	userWrapper *wrapper.UserWrapper
 )
 
+//InitializeController connects the database to shoppinglist
 func InitializeController(DB *gorm.DB) {
 	db = DB
 	userWrapper = wrapper.CreateUserWrapper(db)
