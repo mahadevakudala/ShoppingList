@@ -10,6 +10,7 @@ var (
 	signupController = new(controller.SignupController)
 )
 
+//InitRoutes give connection to database
 func InitRoutes(r *gin.Engine) {
 	UserGroup(r)
 
