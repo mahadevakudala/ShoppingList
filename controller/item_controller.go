@@ -49,6 +49,7 @@ func (s *ItemController) AddItem(context *gin.Context) {
 	newItem.CategoryID = inputItem.CategoryID
 	newItem.ShoppingListID = inputItem.ShoppingListID
 
+	//Getting userIdfrom response
 	user, _ := userWrapper.GetUser(string(resp.([]byte)))
 	newItem.BoughtBy = user.UserID
 
